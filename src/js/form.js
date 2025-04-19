@@ -1,5 +1,5 @@
 import { resetEffect, setStartZoomValue } from './effects.js';
-// import "../pristine/pristine.min.js"
+import "../pristine/pristine.min.js"
 
 const modalFormElement = document.querySelector('.img-upload__overlay');
 const closeButtonElement = modalFormElement.querySelector('.img-upload__cancel');
