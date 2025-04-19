@@ -9,11 +9,6 @@ const hashtagInput = form.querySelector('.text__hashtags');
 const imageDescription = form.querySelector('.text__description');
 const imgUploadPreview = modalFormElement.querySelector('.img-upload__preview img');
 
-// -------------------------------------------------------------------------
-// modalFormElement.classList.remove('hidden');
-// document.body.classList.add('modal-open');
-// -------------------------------------------------------------------------
-
 const setUserPhoto = ()=> {
   const file = inputUploadFileElement.files[0];
   const regExp = /jpg|jpeg|png$/i;
