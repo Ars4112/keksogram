@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Кекстаграм</title>
+    <script type="module" crossorigin src="/keksogram/assets/index-DcxsMbgu.js"></script>
+    <link rel="stylesheet" crossorigin href="/keksogram/assets/index-QiyhHq0Y.css">
+  </head>
+
+  <body>
+    <main>
+      <!-- Фильтрация изображений от других пользователей -->
+      <section class="img-filters img-filters--inactive container">
+        <h2 class="img-filters__title visually-hidden">Фильтр фотографий</h2>
+        <form
+          class="img-filters__form"
+          action="index.html"
+          method="get"
+          autocomplete="off"
+        >
+          <button
+            type="button"
+            class="img-filters__button img-filters__button--active"
+            id="filter-default"
+          >
+            По умолчанию
+          </button>
+          <button type="button" class="img-filters__button" id="filter-random">
+            Случайные
+          </button>
+          <button
+            type="button"
+            class="img-filters__button"
+            id="filter-discussed"
+          >
+            Обсуждаемые
+          </button>
+        </form>
+      </section>
+
+      <!-- Контейнер для изображений от других пользователей -->
+      <section class="pictures container">
+        <h2 class="pictures__title visually-hidden">
+          Фотографии других пользователей
+        </h2>
+
+        <!-- Поле для загрузки нового изображения на сайт -->
+        <section class="img-upload">
+          <div class="img-upload__wrapper">
+            <h2 class="img-upload__title visually-hidden">
+              Загрузка фотографии
+            </h2>
+            <form
+              class="img-upload__form"
+              id="upload-select-image"
+              method="post"
+              enctype="multipart/form-data"
+              autocomplete="off"
+              action="https://26.javascript.pages.academy/kekstagram"
+            >
+              <!-- Изначальное состояние поля для загрузки изображения -->
+              <fieldset class="img-upload__start">
+                <input
+                  type="file"
+                  id="upload-file"
+                  class="img-upload__input visually-hidden"
+                  name="filename"
+                  required
+                />
+                <label
+                  for="upload-file"
+                  class="img-upload__label img-upload__control"
+                  >Загрузить</label
+                >
+              </fieldset>
+
+              <!-- Форма редактирования изображения -->
+              <div class="img-upload__overlay hidden">
+                <div class="img-upload__wrapper">
+                  <div class="img-upload__preview-container">
+                    <!-- Изменение размера изображения -->
+                    <fieldset class="img-upload__scale scale">
+                      <button
+                        type="button"
+                        class="scale__control scale__control--smaller"
+                      >
+                        Уменьшить
+                      </button>
+                      <input
+                        type="text"
+                        class="scale__control scale__control--value"
+                        value="55%"
+                        title="Image Scale"
+                        name="scale"
+                        readonly
+                      />
+                      <button
+                        type="button"
+                        class="scale__control scale__control--bigger"
+                      >
+                        Увеличить
+                      </button>
+                    </fieldset>
+
+                    <!-- Предварительный просмотр изображения -->
+                    <div class="img-upload__preview">
+                      <img
+                        src="/keksogram/assets/upload-default-image-BYh-LZzJ.jpg"
+                        alt="Предварительный просмотр фотографии"
+                      />
+                    </div>
+
+                    <!-- Изменение глубины эффекта, накладываемого на изображение -->
+                    <fieldset class="img-upload__effect-level effect-level">
+                      <input
+                        class="effect-level__value"
+                        type="number"
+                        step="any"
+                        name="effect-level"
+                        value=""
+                      />
+                      <div class="effect-level__slider"></div>
+                    </fieldset>
+
+                    <!-- Кнопка для закрытия формы редактирования изображения -->
+                    <button
+                      type="reset"
+                      class="img-upload__cancel cancel"
+                      id="upload-cancel"
+                    >
+                      Закрыть
+                    </button>
+                  </div>
+
+                  <!-- Наложение эффекта на изображение -->
+                  <fieldset class="img-upload__effects effects">
+                    <ul class="effects__list">
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-none"
+                          value="none"
+                          checked
+                        />
+                        <label for="effect-none" class="effects__label">
+                          <span class="effects__preview effects__preview--none"
+                            >Превью фото без эффекта</span
+                          >
+                          Оригинал
+                        </label>
+                      </li>
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-chrome"
+                          value="chrome"
+                        />
+                        <label for="effect-chrome" class="effects__label">
+                          <span
+                            class="effects__preview effects__preview--chrome"
+                            >Превью эффекта Хром</span
+                          >
+                          Хром
+                        </label>
+                      </li>
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-sepia"
+                          value="sepia"
+                        />
+                        <label for="effect-sepia" class="effects__label">
+                          <span class="effects__preview effects__preview--sepia"
+                            >Превью эффекта Сепия</span
+                          >
+                          Сепия
+                        </label>
+                      </li>
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-marvin"
+                          value="marvin"
+                        />
+                        <label for="effect-marvin" class="effects__label">
+                          <span
+                            class="effects__preview effects__preview--marvin"
+                            >Превью эффекта Марвин</span
+                          >
+                          Марвин
+                        </label>
+                      </li>
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-phobos"
+                          value="phobos"
+                        />
+                        <label for="effect-phobos" class="effects__label">
+                          <span
+                            class="effects__preview effects__preview--phobos"
+                            >Превью эффекта Фобос</span
+                          >
+                          Фобос
+                        </label>
+                      </li>
+                      <li class="effects__item">
+                        <input
+                          type="radio"
+                          class="effects__radio visually-hidden"
+                          name="effect"
+                          id="effect-heat"
+                          value="heat"
+                        />
+                        <label for="effect-heat" class="effects__label">
+                          <span class="effects__preview effects__preview--heat"
+                            >Превью эффекта Зной</span
+                          >
+                          Зной
+                        </label>
+                      </li>
+                    </ul>
+                  </fieldset>
+
+                  <!-- Добавление хэш-тегов и комментария к изображению -->
+                  <fieldset class="img-upload__text text">
+                    <div class="img-upload__field-wrapper">
+                      <input
+                        class="text__hashtags"
+                        name="hashtags"
+                        type="text"
+                        placeholder="#ХэшТег"
+                        required
+                      />
+                    </div>
+                    <div class="img-upload__field-wrapper">
+                      <textarea
+                        class="text__description"
+                        name="description"
+                        type="text"
+                        placeholder="Ваш комментарий..."
+                        maxlength="140"
+                      ></textarea>
+                    </div>
+                  </fieldset>
+
+                  <!-- Кнопка для отправки данных на сервер -->
+                  <button
+                    type="submit"
+                    class="img-upload__submit"
+                    id="upload-submit"
+                  >
+                    Опубликовать
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Здесь будут изображения других пользователей -->
+      </section>
+
+      <!-- Полноэкранный показ изображения -->
+      <section class="big-picture overlay hidden">
+        <h2 class="big-picture__title visually-hidden">Просмотр фотографии</h2>
+        <div class="big-picture__preview">
+          <!-- Просмотр изображения -->
+          <div class="big-picture__img">
+            <img
+              src="/keksogram/assets/logo-background-3-Cpcf0IT0.jpg"
+              alt="Девушка в купальнике"
+              width="600"
+              height="600"
+            />
+          </div>
+
+          <!-- Информация об изображении. Подпись, комментарии, количество лайков -->
+          <div class="big-picture__social social">
+            <div class="social__header">
+              <img
+                class="social__picture"
+                src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%20width='33.625'%20height='33.657'%20viewBox='0%200%2033.625%2033.657'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23343434;%20}%20.cls-1,%20.cls-2%20{%20fill-rule:%20evenodd;%20}%20.cls-2%20{%20fill:%20%23ffe853;%20}%20%3c/style%3e%3c/defs%3e%3cg%3e%3cpath%20d='M16.812,-0.003%20C26.104,-0.003%2033.637,7.529%2033.637,16.821%20C33.637,26.113%2026.104,33.646%2016.812,33.646%20C7.520,33.646%20-0.012,26.113%20-0.012,16.821%20C-0.012,7.529%207.520,-0.003%2016.812,-0.003%20Z'%20class='cls-1'/%3e%3cpath%20d='M19.327,15.567%20L26.232,8.938%20L19.514,8.938%20L15.370,13.005%20L15.370,8.938%20L9.530,8.938%20L9.530,24.937%20L15.370,24.937%20L15.370,19.793%20L15.792,19.388%20L19.898,24.937%20L26.531,24.937%20L19.327,15.567%20Z'%20class='cls-2'/%3e%3c/g%3e%3c/svg%3e"
+                alt="Аватар автора фотографии"
+                width="35"
+                height="35"
+              />
+              <p class="social__caption">Тестим новую камеру! =)</p>
+              <p class="social__likes">
+                Нравится <span class="likes-count">356</span>
+              </p>
+            </div>
+
+            <!-- Комментарии к изображению -->
+            <div class="social__comment-count">
+              5 из <span class="comments-count">125</span> комментариев
+            </div>
+            <ul class="social__comments">
+              <li class="social__comment">
+                <img
+                  class="social__picture"
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%20width='33.625'%20height='33.657'%20viewBox='0%200%2033.625%2033.657'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23fd60e5;%20}%20.cls-1,%20.cls-2%20{%20fill-rule:%20evenodd;%20}%20.cls-2%20{%20fill:%20%23fff;%20}%20%3c/style%3e%3c/defs%3e%3cg%3e%3cpath%20d='M16.812,-0.003%20C26.104,-0.003%2033.637,7.529%2033.637,16.821%20C33.637,26.113%2026.104,33.646%2016.812,33.646%20C7.520,33.646%20-0.012,26.113%20-0.012,16.821%20C-0.012,7.529%207.520,-0.003%2016.812,-0.003%20Z'%20class='cls-1'/%3e%3cpath%20d='M25.691,14.816%20C25.691,14.816%2025.632,12.073%2025.584,10.792%20C25.584,10.792%2025.861,7.919%2023.723,9.057%20C23.723,9.057%2020.135,9.907%2017.487,15.713%20C17.451,15.606%2017.301,15.511%2017.111,15.464%20C17.297,14.499%2017.933,11.610%2018.973,10.974%20C19.032,11.037%2019.107,11.077%2019.190,11.077%20C19.344,11.077%2019.471,10.958%2019.471,10.808%20C19.471,10.654%2019.344,10.531%2019.190,10.531%20C19.044,10.531%2018.909,10.654%2018.909,10.808%20C18.909,10.820%2018.921,10.828%2018.921,10.848%20C17.795,11.516%2017.163,14.452%2016.973,15.440%20C16.937,15.436%2016.902,15.432%2016.858,15.432%20C16.831,15.432%2016.795,15.440%2016.771,15.440%20C16.581,14.452%2015.945,11.516%2014.819,10.848%20C14.823,10.828%2014.831,10.820%2014.831,10.808%20C14.831,10.654%2014.696,10.531%2014.554,10.531%20C14.396,10.531%2014.270,10.654%2014.270,10.808%20C14.270,10.958%2014.396,11.077%2014.554,11.077%20C14.633,11.077%2014.712,11.037%2014.764,10.974%20C15.819,11.607%2016.435,14.484%2016.633,15.464%20C16.451,15.503%2016.313,15.574%2016.250,15.665%20C13.606,9.951%2010.065,9.109%2010.065,9.109%20C7.934,7.970%208.199,10.848%208.199,10.848%20C8.152,12.140%208.097,14.871%208.097,14.871%20C7.812,17.262%2010.934,17.622%2010.934,17.622%20C6.812,18.104%209.203,21.906%209.203,21.906%20C10.744,23.159%2010.934,24.823%2010.934,24.823%20C11.408,24.475%2012.128,25.368%2012.128,25.368%20C12.717,24.475%2013.210,24.708%2013.210,24.708%20C14.491,23.811%2015.613,22.226%2016.210,21.277%20L16.210,21.519%20C16.210,21.641%2016.337,21.756%2016.518,21.819%20L16.518,21.961%20C16.518,22.155%2016.668,22.305%2016.858,22.305%20C17.044,22.305%2017.198,22.155%2017.198,21.961%20L17.198,21.819%20C17.388,21.756%2017.507,21.641%2017.507,21.519%20L17.507,21.111%20C18.087,22.044%2019.238,23.720%2020.573,24.657%20C20.573,24.657%2021.071,24.419%2021.660,25.301%20C21.660,25.301%2022.364,24.419%2022.853,24.759%20C22.853,24.759%2023.039,23.103%2024.589,21.846%20C24.589,21.846%2026.972,18.052%2022.853,17.566%20C22.853,17.566%2025.976,17.210%2025.691,14.816%20Z'%20class='cls-2'/%3e%3c/g%3e%3c/svg%3e"
+                  alt="Аватар комментатора фотографии"
+                  width="35"
+                  height="35"
+                />
+                <p class="social__text">
+                  Мега фото! Просто обалдеть. Как вам так удалось?
+                </p>
+              </li>
+              <li class="social__comment">
+                <img
+                  class="social__picture"
+                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%20width='33.625'%20height='33.625'%20viewBox='0%200%2033.625%2033.625'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%237a60fd;%20}%20.cls-2%20{%20fill:%20%23fff;%20fill-rule:%20evenodd;%20}%20%3c/style%3e%3c/defs%3e%3cg%3e%3ccircle%20cx='16.813'%20cy='16.813'%20r='16.813'%20class='cls-1'/%3e%3cpath%20d='M22.361,14.707%20C22.361,14.951%2022.011,15.158%2021.554,15.211%20C21.554,15.214%2021.554,15.220%2021.554,15.223%20L21.364,15.223%20L12.000,15.223%20L11.938,15.223%20L11.938,15.220%20C11.419,15.201%2011.009,14.979%2011.009,14.707%20C11.009,14.551%2011.156,14.404%2011.381,14.307%20C11.362,14.273%2011.353,14.235%2011.353,14.198%20C11.353,14.076%2011.409,13.973%2011.484,13.904%20C11.403,13.522%2011.353,13.137%2011.353,12.740%20C11.353,9.710%2013.767,7.252%2016.744,7.252%20C19.728,7.252%2022.142,9.710%2022.142,12.740%20C22.142,13.178%2022.080,13.603%2021.992,14.013%20C22.105,14.076%2022.196,14.207%2022.196,14.363%20C22.196,14.385%2022.183,14.404%2022.183,14.416%20C22.293,14.498%2022.361,14.595%2022.361,14.707%20ZM16.751,8.703%20C19.712,10.735%2020.132,13.122%2020.132,13.122%20C20.838,8.309%2016.751,8.703%2016.751,8.703%20ZM21.417,16.583%20L16.501,28.444%20L12.066,16.561%20L12.000,16.339%20L21.495,16.339%20L21.417,16.583%20Z'%20class='cls-2'/%3e%3c/g%3e%3c/svg%3e"
+                  alt="Аватар комментатора фотографии"
+                  width="35"
+                  height="35"
+                />
+                <p class="social__text">Да это фоташоп!!!!!!!!</p>
+              </li>
+            </ul>
+
+            <!-- Кнопка для загрузки новой порции комментариев -->
+            <button
+              type="button"
+              class="social__comments-loader comments-loader"
+            >
+              Загрузить еще
+            </button>
+
+            <!-- Форма для отправки комментария -->
+            <div class="social__footer">
+              <img
+                class="social__picture"
+                src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20preserveAspectRatio='xMidYMid'%20width='37.313'%20height='37.32'%20viewBox='0%200%2037.313%2037.32'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%230388ef;%20}%20.cls-2%20{%20fill:%20%23fff;%20fill-rule:%20evenodd;%20}%20%3c/style%3e%3c/defs%3e%3cg%3e%3ccircle%20cx='18.656'%20cy='18.66'%20r='18.656'%20class='cls-1'/%3e%3cpath%20d='M28.326,23.258%20L26.758,23.258%20L26.758,22.304%20C26.739,21.632%2026.518,21.021%2026.132,20.519%20C25.858,20.148%2025.506,19.839%2025.104,19.634%20C24.668,19.399%2024.173,19.271%2023.648,19.271%20C22.021,19.271%2020.677,20.531%2020.549,22.130%20L20.549,23.564%20L16.079,23.564%20L16.079,22.165%20C16.029,21.570%2015.809,21.033%2015.477,20.581%20C15.202,20.210%2014.854,19.905%2014.437,19.696%20C14.009,19.464%2013.514,19.333%2012.985,19.333%20C11.289,19.333%209.906,20.697%209.878,22.393%20C9.878,22.408%209.878,22.424%209.878,22.447%20C9.878,22.459%209.878,22.466%209.878,22.482%20L9.863,22.482%20L9.863,23.432%20L7.622,23.432%20C7.696,23.247%207.746,23.030%207.746,22.798%20C7.746,22.462%207.638,22.142%207.460,21.875%20L8.128,21.875%20L8.128,17.424%20L12.815,17.057%20L15.133,12.842%20L27.704,12.935%20L27.731,21.686%20L28.226,21.686%20C28.172,21.887%2028.141,22.095%2028.141,22.323%20C28.141,22.663%2028.210,22.991%2028.326,23.258%20ZM19.440,14.144%20L15.751,14.040%20L13.947,17.131%20L15.002,17.131%20L18.525,17.131%20L19.440,18.058%20L19.440,14.144%20ZM12.942,19.646%20C13.410,19.646%2013.850,19.758%2014.236,19.959%20C14.607,20.156%2014.924,20.426%2015.175,20.766%20C15.519,21.222%2015.728,21.798%2015.728,22.424%20C15.728,23.965%2014.484,25.221%2012.942,25.221%20C11.405,25.221%2010.153,23.965%2010.153,22.424%20C10.153,22.412%2010.153,22.393%2010.160,22.381%20C10.184,20.867%2011.416,19.646%2012.942,19.646%20ZM11.219,22.493%20C11.219,23.444%2011.996,24.216%2012.946,24.216%20C13.897,24.216%2014.677,23.444%2014.677,22.493%20C14.677,22.107%2014.541,21.751%2014.333,21.458%20C14.178,21.253%2013.981,21.087%2013.753,20.967%20C13.514,20.836%2013.240,20.770%2012.946,20.770%20C12.003,20.770%2011.235,21.520%2011.219,22.466%20C11.219,22.478%2011.219,22.485%2011.219,22.493%20ZM23.602,19.735%20C24.073,19.735%2024.517,19.847%2024.907,20.055%20C25.274,20.245%2025.587,20.519%2025.834,20.851%20C26.190,21.323%2026.387,21.890%2026.387,22.516%20C26.387,24.058%2025.147,25.306%2023.602,25.306%20C22.072,25.306%2020.820,24.058%2020.820,22.516%20C20.820,22.501%2020.820,22.485%2020.820,22.474%20C20.843,20.956%2022.083,19.735%2023.602,19.735%20ZM21.886,22.582%20C21.886,23.544%2022.659,24.309%2023.605,24.309%20C24.571,24.309%2025.344,23.544%2025.344,22.582%20C25.344,22.196%2025.208,21.836%2024.992,21.547%20C24.842,21.350%2024.648,21.172%2024.416,21.056%20C24.177,20.925%2023.903,20.855%2023.605,20.855%20C22.667,20.855%2021.905,21.612%2021.886,22.559%20C21.886,22.567%2021.886,22.578%2021.886,22.582%20Z'%20class='cls-2'/%3e%3c/g%3e%3c/svg%3e"
+                alt="Аватар комментатора фотографии"
+                width="35"
+                height="35"
+              />
+              <input
+                type="text"
+                class="social__footer-text"
+                placeholder="Ваш комментарий..."
+              />
+              <button type="button" class="social__footer-btn" name="button">
+                Отправить
+              </button>
+            </div>
+          </div>
+
+          <!-- Кнопка для выхода из полноэкранного просмотра изображения -->
+          <button
+            type="reset"
+            class="big-picture__cancel cancel"
+            id="picture-cancel"
+          >
+            Закрыть
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer container">
+      <div class="page-footer__wrapper">
+        <div class="page-footer__copyright copyright">
+          <a
+            class="copyright__link copyright__link--image"
+            href="https://htmlacademy.ru/intensive/javascript"
+            ><img
+              src="/keksogram/assets/htmla-logo-C0UKzA7F.svg"
+              width="130"
+              height="45"
+              alt="HTML Academy"
+          /></a>
+          <p>
+            Сделано в
+            <a
+              class="copyright__link copyright__link--text"
+              href="https://htmlacademy.ru/intensive/javascript"
+              >HTML Academy</a
+            >
+          </p>
+        </div>
+        <ul class="page-footer__contacts contacts">
+          <li>
+            <a
+              href="https://twitter.com/htmlacademy_ru"
+              class="contacts__link contacts__link--twitter"
+              >Twitter</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://vk.com/htmlacademy"
+              class="contacts__link contacts__link--vk"
+              >VK</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- Шаблон изображения случайного пользователя -->
+    <template id="picture">
+      <a href="#" class="picture">
+        <img
+          class="picture__img"
+          src=""
+          width="182"
+          height="182"
+          alt="Случайная фотография"
+        />
+        <p class="picture__info">
+          <span class="picture__comments"></span>
+          <span class="picture__likes"></span>
+        </p>
+      </a>
+    </template>
+
+    <!-- Сообщение с ошибкой загрузки изображения -->
+    <template id="error">
+      <section class="error">
+        <div class="error__inner">
+          <h2 class="error__title">Ошибка загрузки файла</h2>
+          <button type="button" class="error__button">
+            Загрузить другой файл
+          </button>
+        </div>
+      </section>
+    </template>
+
+    <!-- Сообщение об успешной загрузке изображения -->
+    <template id="success">
+      <section class="success">
+        <div class="success__inner">
+          <h2 class="success__title">Изображение успешно загружено</h2>
+          <button type="button" class="success__button">Круто!</button>
+        </div>
+      </section>
+    </template>
+
+    <!-- Экран загрузки изображения -->
+    <template id="messages">
+      <div class="img-upload__message img-upload__message--loading">
+        Загружаем...
+      </div>
+    </template>
+    <script src="pristine/pristine.min.js" defer></script>
+    <script src="nouislider/nouislider.js"></script>
+  </body>
+</html>
