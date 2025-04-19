@@ -3,5 +3,6 @@ import "./form.js";
 import "./effects.js";
 import { createUserPhotos } from "./photo.js";
 import "../nouislider/nouislider.js";
+import "../pristine/pristine.min.js"
 
 createUserPhotos();
