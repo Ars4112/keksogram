@@ -7,6 +7,7 @@ import "../pristine/pristine.min.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
 	const noUiSlider = await import("/nouislider/nouislider.js");
+    createUserPhotos();
 });
 
-createUserPhotos();
+
