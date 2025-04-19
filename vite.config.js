@@ -19,14 +19,4 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: path.resolve(__dirname, 'src/assets/nouislider/*'),
-          dest: 'assets/nouislider'
-        }
-      ]
-    })
-  ]
 });

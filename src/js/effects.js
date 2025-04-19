@@ -1,4 +1,4 @@
-// import '../assets/nouislider/nouislider';
+import noUiSlider from 'nouislider';
 
 const effectSliderContainerElement = document.querySelector(".effect-level");
 const effectSliderElement = effectSliderContainerElement.querySelector(".effect-level__slider");
