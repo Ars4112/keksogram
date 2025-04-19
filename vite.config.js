@@ -10,6 +10,8 @@ export default defineConfig({
 	build: {
 		outDir: "../dist",
 		emptyOutDir: true,
-		// assetsInclude: ["**/*.css", "**/*.js"],
 	},
+  optimizeDeps: {
+    include: ['nouislider']
+  }
 });
