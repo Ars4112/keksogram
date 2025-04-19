@@ -11,4 +11,14 @@ export default defineConfig({
     outDir: "../dist",
     emptyOutDir: true,
   },
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/img/*',
+          dest: 'img'
+        }
+      ]
+    })
+  ]
 });
