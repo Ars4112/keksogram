@@ -12,24 +12,23 @@ export default defineConfig({
 	build: {
 		outDir: "../dist",
 		emptyOutDir: true,
-    assetsDir: 'photos',
 	},
-	plugins: [
-		viteImagemin({
-			gifsicle: { optimizationLevel: 3 },
-			mozjpeg: { quality: 75 },
-			optipng: { optimizationLevel: 5 },
-			svgo: {
-				plugins: [{ name: "removeViewBox" }, { name: "removeEmptyAttrs", active: false }],
-			},
-		}),
-		viteStaticCopy({
-			targets: [
-				{
-					src: path.resolve(__dirname, "src/photos/*.jpg"),
-					dest: "photos",
-				},
-			],
-		}),
-	],
+	// plugins: [
+	// 	viteImagemin({
+	// 		gifsicle: { optimizationLevel: 3 },
+	// 		mozjpeg: { quality: 75 },
+	// 		optipng: { optimizationLevel: 5 },
+	// 		svgo: {
+	// 			plugins: [{ name: "removeViewBox" }, { name: "removeEmptyAttrs", active: false }],
+	// 		},
+	// 	}),
+	// 	viteStaticCopy({
+	// 		targets: [
+	// 			{
+	// 				src: path.resolve(__dirname, "src/photos/*.jpg"),
+	// 				dest: "photos",
+	// 			},
+	// 		],
+	// 	}),
+	// ],
 });
