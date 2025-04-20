@@ -130,7 +130,7 @@ export const createUserPhotos = () => {
   urlArray.forEach((i) => {
     const commentsArray = createCommentsArray();
     const photoInfo = {
-      src: `./photos/${i}.jpg`,
+      src: `/keksogram/photos/${i}.jpg`,
       likes: getRandomPositiveInteger(50, 200),
       comments: commentsArray,
     };
