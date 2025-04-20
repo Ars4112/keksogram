@@ -7,19 +7,19 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: path.resolve(__dirname, "src"),
-  base: "/keksogram/",
+  base: "/",
   build: {
     outDir: "../dist",
     emptyOutDir: true,
   },
-  plugins: [
-    viteStaticCopy({
-      targets: [
-        {
-          src: 'src/photos/*',
-          dest: 'photos'
-        }
-      ]
-    })
-  ]
+  // plugins: [
+  //   viteStaticCopy({
+  //     targets: [
+  //       {
+  //         src: 'src/photos/*.{jpg,png,webp}',
+  //         dest: 'photos'
+  //       }
+  //     ]
+  //   })
+  // ]
 });
