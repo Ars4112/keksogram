@@ -7,7 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root: path.resolve(__dirname, "src"),
-  base: "/",
+  base: "/keksogram",
   build: {
     outDir: "../dist",
     emptyOutDir: true,
